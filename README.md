@@ -1,25 +1,31 @@
-# TP_NLP
-Trabajo Práctico Individual CODIGO: 03 – Detección de Emociones y Recuperación de la Información (Information Retrieval)
-082057 – Procesamiento del Lenguaje Natural
+# Hola, soy Olaf Querol 👋 <h1> Estudiante de Ingeniería en Sistemas de Información 👨‍💻<h2>  
+  * 📚 Actualmente cursando **Tercer año** en la ***UTN FRBA***
+  * 📚 Seundario Completo en el ***Instituto Santa Maria***
+  * 👯 Buscando participar en proyectos y aprender
+  * ⚽ Amante de los deportes
+  * 😄 21 años de edad
+  * 📫 Podes contactarme: olafquerol@gmail.com 
+## Lenguajes y conocimientos 🛠 <h2> ![C](https://img.shields.io/badge/c-%2300599C.svg?style=for-the-badge&logo=c&logoColor=white) ![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white) ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white) 	![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white) 	![Git](https://img.shields.io/badge/git-%23F05033.svg?style=for-the-badge&logo=git&logoColor=white) ![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white) ![Microsoft Excel](https://img.shields.io/badge/Microsoft_Excel-217346?style=for-the-badge&logo=microsoft-excel&logoColor=white) ![Microsoft Word](https://img.shields.io/badge/Microsoft_Word-2B579A?style=for-the-badge&logo=microsoft-word&logoColor=white)
+
+#Trabajo Práctico Individual CODIGO: 03 <h1>  Detección de Emociones y Recuperación de la Información (Information Retrieval)<h2> 082057 – Procesamiento del Lenguaje Natural<h3>
 Trabajo Práctico Individual
-CODIGO: 03 – Detección de Emociones y Recuperación de la
-Información (Information Retrieval)
-1 LINEAMIENTOS
-• El trabajo práctico es 100% individual.
-• Todo el código fuente desarrollado (si hubiera) así como el documento de texto que lo
+
+## 1 LINEAMIENTOS
+  * El trabajo práctico es 100% individual.
+  * Todo el código fuente desarrollado (si hubiera) así como el documento de texto que lo
 acompaña con las justificaciones, técnicas, bibliografía, autores y demás correctamente
 citados, deben ser subidos a la cuenta de Github https://github.com/ personal y privada
 de cada estudiante y compartida con la cuenta de github del profesor
 (https://github.com/hernanborre). Sólo así se considera el trabajo entregado.
-• El/La estudiante, deberá realizar una defensa oral de su código, técnicas utilizadas, citar
+  * El/La estudiante, deberá realizar una defensa oral de su código, técnicas utilizadas, citar
 autores utilizados si es necesario y poder expresar claramente tanto su desarrollo
 cognitivo a la solución, así como las conclusiones obtenidas.
-• Este trabajo práctico constituye la única evaluación en primera instancia de esta
+  * Este trabajo práctico constituye la única evaluación en primera instancia de esta
 materia, por lo cual la producción de la solución del mismo se espera que esté a la altura
-o supere el tiempo dedicado a un parcial.
-• Fecha de entrega: 4 de Noviembre de 2022
+    * supere el tiempo dedicado a un parcial.
+  * Fecha de entrega: 4 de Noviembre de 2022
 
-2 CONSIGNA
+## 2 CONSIGNA
 El análisis y detección de sentimientos (positivos, negativos o neutros) es uno de los campos más
 importantes del Procesamiento del Lenguaje Natural.
 Diversas técnicas y estado del arte (SOTA) son aportadas día a día por la comunidad científica,
@@ -47,7 +53,7 @@ variación de esa criptmoneda en el mercado el día anterior y posterior a un d�
 ejemplos, sería lo correcto en este caso para automatizar el proceso de captura de información
 pero pueden hacerlo manualmente)
 
-2 ENTREGA, CODIGO Y EJEMPLOS
+## 2 ENTREGA, CODIGO Y EJEMPLOS
 El código deberá ser escrito en Python 3 y/o Javascript (typescript y expressjs o nodejs deseable).
 Se pueden usar todas las librerías que se crean necesarias.
 Además del código desarrollado, se debe entregar un documento de texto (puede ser un .doc o
