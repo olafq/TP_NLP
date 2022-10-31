@@ -9,8 +9,18 @@ import pyodbc
 from sqlalchemy import case, create_engine, null, true
 import snscrape.modules.twitter as sntwitter
 import snscrape.modules.reddit as sntreddit
-import nest_asyncio
-nest_asyncio.apply()
+import datetime
+import yfinance as yf
+def precio_fecha_open(fecha_ayer,fecha_actual):
+    btc = yf.Ticker("BTC-USD")
+    data = btc.history(start=fecha_ayer, end=fecha_actual)
+    a = pasar_a_lista(data)
+    for x in a:
+        a = None
+        for c in x:
+            if(a is None):
+                a=2
+                return c
 #FUNCIONES PARA APIS 
 #FUNCIONES PARA API TW
 def get_auth_tw():#Para conectarse a la API de tw 
@@ -21,7 +31,6 @@ def get_auth_tw():#Para conectarse a la API de tw
     auth = tweepy.OAuthHandler(API_KEY, API_KEY_SECRET)
     auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
     return auth
-
 
 def get_twitter(query,tweets,limit):#Para obtener contenido del tweet sobre una palabra clave("query")
  for tweet in sntwitter.TwitterSearchScraper(query).get_items():
@@ -80,11 +89,8 @@ def get_post_criptoNoticias(query):
 #-------------------------------------------------------------------------
 #GUARDAR DATOS EN LA SQL
 #Guardar datos de un DataFrame en una bd SQL(MEJORAR ALGORITMO QUE NO FUNCIONA)
-def pasar_a_lista(df):
-    lista =df.values.tolist()
-    return lista
 
-def conectarse_a_SQL(lista):
+def conectarse_a_SQL(pronostico_BTC,fecha_pronostico,fecha_a_predecir,precio_open,):
     host =  "localhost",
     user = "sa",
     password = "12345",
@@ -92,13 +98,8 @@ def conectarse_a_SQL(lista):
     try:
         connection = pyodbc.connect('DRIVER={SQL Server};SERVER=LAPTOP-4EK17G6N\SQLEXPRESS;DATABASE=NLP;UID=sa;PWD=12345')
         cursoInsert = connection.cursor()
-        print("conexion exitosa")
-        consulta = "INSERT INTO Posts_reddit(title,author,selftext,sentiment,analisis) VALUES(?,?,?,?,?);"
-        '''
-        No se porque tira fail al insertar la lista 
-        for  x in lista:
-            cursoInsert.execute(consulta,x)
-        ''' 
+        consulta = "INSERT INTO sentimiento_relacionado(fecha_del_analisis, analisis,fecha_a_predecir,precio_open) VALUES(?,?,?,?);"
+        cursoInsert.execute(consulta,fecha_pronostico,pronostico_BTC,fecha_a_predecir,precio_open)
         cursoInsert.commit()
         cursoInsert.close()
         print("conexion exitosa")
@@ -128,14 +129,15 @@ def analysis(score):
 def sumarColumna(col):
     total_columna = col.sum()
     return total_columna
+def pasar_a_lista(df):
+    lista =df.values.tolist()
+    return lista
 def calculo_de_sentimiento(sentimiento_total):
-    if(sentimiento_total>=0 and sentimiento_total<=12):
+    if(sentimiento_total>=0 and sentimiento_total<=10):
         return "Se espera una bajada fuerte en e precio"
-    elif(sentimiento_total>=13 and sentimiento_total<=17):
+    elif(sentimiento_total>=11 and sentimiento_total<16):
         return "Se espera una minima disminucion en el precio"
-    elif(sentimiento_total>=18 and sentimiento_total<=19):
-        return "se espera que no varie el precio"
-    elif(sentimiento_total>=20 and sentimiento_total<=30):
-        return "se espera un aumento en el precio"
+    elif(sentimiento_total>=16 and sentimiento_total<=30):
+        return "se espera un aumento minimo en el precio"
     elif(sentimiento_total>=30 ):
         return "se espera un aumento fuerte en el precio"
