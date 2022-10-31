@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
 import json
-import twint
 from nltk.sentiment.vader import SentimentIntensityAnalyzer # vader muy bueno para analisiar textos cortos como los tweets  
 import tweepy
 import pandas as pd # clave para el prosesamiento de informacion de manera ordeanada 

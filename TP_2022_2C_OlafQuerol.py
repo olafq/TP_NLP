@@ -1,11 +1,5 @@
 from matplotlib import scale
-from requests import post
-from sqlalchemy import null
-from yfinance import Ticker
 from funciones import *
-import  datetime
-import matplotlib.pyplot as plt
-from sklearn.preprocessing import   MinMaxScaler
 #FECHA ACTUAL 
 actual =datetime.date.today()
 #actual = actual -datetime.timedelta(1) 
