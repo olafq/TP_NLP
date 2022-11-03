@@ -2,7 +2,7 @@ from matplotlib import scale
 from funciones import *
 #FECHA ACTUAL 
 actual =datetime.date.today()
-#actual = actual -datetime.timedelta(1) 
+actual = actual -datetime.timedelta(1) 
 ayer = actual - datetime.timedelta(1)
 mañana = actual +datetime.timedelta(1)
 fecha_acual = actual.strftime('%Y-%m-%d')
