@@ -4,7 +4,8 @@ import tweepy #Uso esta libreria para poder conectarme a la API de TW
 import pandas as pd # clave para el prosesamiento de informacion de manera ordeanada 
 import requests
 import pyodbc
-from sqlalchemy import case, create_engine, null, true
+import matplotlib
+from sqlalchemy import  true
 import snscrape.modules.twitter as sntwitter# es para la API de twitter para poder obtener los twits
 import datetime 
 import yfinance as yf # es para la API de yahoo finance y podes sacar el precio de la cripto
@@ -138,9 +139,9 @@ def analysis(score):
 
 # calculo el sentimineto en funcion del sentimineto total que es la suma de lso 3 sentiminetos 
 def calculo_de_sentimiento(sentimiento_total):
-    if(sentimiento_total>=0 and sentimiento_total<=10):
+    if(sentimiento_total>=0 and sentimiento_total<=7):
         return "Se espera una bajada fuerte en e precio"
-    elif(sentimiento_total>=11 and sentimiento_total<16):
+    elif(sentimiento_total>=8 and sentimiento_total<16):
         return "Se espera una minima disminucion en el precio"
     elif(sentimiento_total>=16 and sentimiento_total<=30):
         return "se espera un aumento minimo en el precio"
