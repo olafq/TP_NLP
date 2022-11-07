@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup # Uso esta libreria para 
 from nltk.sentiment.vader import SentimentIntensityAnalyzer # vader muy bueno para analisiar textos cortos como los tweets  
-import tweepy #Uso esta libreria para poder conectarme a la API de TW
 import pandas as pd # clave para el prosesamiento de informacion de manera ordeanada 
 import requests
 import pyodbc
@@ -18,16 +17,6 @@ import yfinance as yf # es para la API de yahoo finance y podes sacar el precio 
 #########################
 ##FUNCIONES PARA API TW##
 #########################
-
-def get_auth_tw():#Para conectarse a la API de tw 
-    API_KEY ="gSnawrypKwD2KJyV3m9uuvDp1"
-    API_KEY_SECRET = "jUc2SGNOkCKJoqDdygEYMuQm3zhN3MHz2t2YCphkFlp44KWod9"
-    ACCESS_TOKEN  = "1583200205222060058-vP4q8fUUMZjHW1IfpdukMa9karRcMf"
-    ACCESS_TOKEN_SECRET  = "fqTJAhNWuKafOTo5l0iHTTn3w9eTSD7g9wPMxsFyLsWqS"
-    auth = tweepy.OAuthHandler(API_KEY, API_KEY_SECRET)
-    auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
-    return auth
-
 
 #Para obtener contenido del tweet sobre una palabra clave("query"), recorre los tweets hasta el limite, y guarda los tweets con mas de 1000 seguidores 
 # esto se hizo asi para tener una mejor prediccion del precio tomando tweets de gente mas importantes. Guarda el contenido y usuario en el dataFrame df.
@@ -50,6 +39,7 @@ def get_twitter(query,tweets,limit):
 
 #Para conectarse a la API de Reddit pasandole el subreddit(bitcoin), listing(para saber cuales traer,top,best,etc.),
 #el limit para saber hasta cuanto traer y el timepo de los tweet que quiero trear.
+
 def get_auth_reddit(subreddit,listing,limit,timeframe):
     try:
         base_url = f'https://www.reddit.com/r/{subreddit}/{listing}.json?limit={limit}&t={timeframe}'
@@ -105,13 +95,13 @@ def get_post_criptoNoticias(query):
 
 
 #Guardar datos de un DataFrame en una bd SQL(MEJORAR ALGORITMO QUE NO FUNCIONA)
-def conectarse_a_SQL(pronostico_BTC,fecha_pronostico,fecha_a_predecir,precio_open,):
+def conectarse_a_SQL(pronostico_BTC,fecha_pronostico,precio,fecha_a_predecir,precio_open,):
 
     try:
         connection = pyodbc.connect('DRIVER={SQL Server};SERVER=LAPTOP-4EK17G6N\SQLEXPRESS;DATABASE=NLP;UID=sa;PWD=12345')# me conecto a la base de dato SQL 
         cursoInsert = connection.cursor() # creo un cursor que se relaciona con connection de nuestra base ce datos
-        consulta = "INSERT INTO sentimiento_relacionado(fecha_del_analisis, analisis,fecha_a_predecir,precio_open) VALUES(?,?,?,?);"# creo la consulta que queremos hacer
-        cursoInsert.execute(consulta,fecha_pronostico,pronostico_BTC,fecha_a_predecir,precio_open) # ejecuto la consulta pasandole los datos que quiero que inserte en sus respectivas columnas
+        consulta = "INSERT INTO Sentimientos_Relacionados(fecha_de_analisis, precio,analisis,fecha_a_predecir,precio_cierre) VALUES(?,?,?,?,?);"# creo la consulta que queremos hacer
+        cursoInsert.execute(consulta,fecha_pronostico,precio,pronostico_BTC,fecha_a_predecir,precio_open) # ejecuto la consulta pasandole los datos que quiero que inserte en sus respectivas columnas
         cursoInsert.commit() #comiteo para que se guarde 
         cursoInsert.close() #cierro la conexion 
         print("conexion exitosa")
@@ -141,11 +131,11 @@ def analysis(score):
 def calculo_de_sentimiento(sentimiento_total):
     if(sentimiento_total>=0 and sentimiento_total<=7):
         return "Se espera una bajada fuerte en e precio"
-    elif(sentimiento_total>=8 and sentimiento_total<16):
+    elif(sentimiento_total>=8 and sentimiento_total<14):
         return "Se espera una minima disminucion en el precio"
-    elif(sentimiento_total>=16 and sentimiento_total<=30):
+    elif(sentimiento_total>=14 and sentimiento_total<=25):
         return "se espera un aumento minimo en el precio"
-    elif(sentimiento_total>=30 ):
+    elif(sentimiento_total>=26 ):
         return "se espera un aumento fuerte en el precio"
 
 ######################################################################### 
@@ -162,14 +152,11 @@ def pasar_a_lista(df):
     lista =df.values.tolist()
     return lista
 
-# con esto se obtiene el precio de apertura 
+# con esto se obtiene el precio de cierre
 def precio_fecha_open(fecha_ayer,fecha_actual):
     btc = yf.Ticker("BTC-USD")
     data = btc.history(start=fecha_ayer, end=fecha_actual)
     a = pasar_a_lista(data)
-    for x in a:
-        a = None
-        for c in x:
-            if(a is None):
-                a=2
-                return c
+    valor = a[0][3] 
+    return valor
+           
