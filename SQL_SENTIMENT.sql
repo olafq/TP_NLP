@@ -17,4 +17,4 @@ declare @cargar_tabla int
 exec @cargar_tabla = cargar_tabla
 go
 
-delete from Sentimiento_Relacionado  where fecha_del_analisis = '2022-11-06'
+delete from Sentimientos_Relacionados  where fecha_de_analisis = '2022-11-07'

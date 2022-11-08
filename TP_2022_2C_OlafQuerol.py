@@ -12,7 +12,7 @@ if __name__ == '__main__':
     print(fecha_ayer_reddit)
 #DECLARACIONES DE VARIABLES PARA TWITTER y la consulta que se va hacer 
     tweets = []
-    query = "(Bitcoin OR · OR $BTC) min_faves:100 until:2022-11-07 since:2022-10-06"
+    query = "(Bitcoin OR · OR $BTC) min_faves:100 until:2022-11-08 since:2022-10-07"
 
 #DECLARACIONES DE VARIABLES PARA REDDIT
     subreddit = 'Bitcoin'
@@ -31,25 +31,25 @@ if __name__ == '__main__':
     twetter['analisis'] = twetter['sentimiento'].apply(analysis)
     cripto_noticias['analisis'] = cripto_noticias['sentimiento'].apply(analysis)
 
-    
+    '''
     print(reddit) # muestro tabla de rediit que hablaron de bitcoin y su valor sentimental
     print(twetter)# muestro tabla de twits que hablaron de bitcoin y su valor sentimental
     print(cripto_noticias)# muestro tabla de titulo y subtitulo que hablaron de bitcoin y su valor sentimental
-    
+    '''
     sentimiento_total_twetter = sumarColumna(twetter['sentimiento']) 
     sentimiento_total_criptoNoticias = sumarColumna(cripto_noticias['sentimiento'])
     sentimiento_total_reddit = sumarColumna(reddit['sentimiento'])
     sentimiento_total = sentimiento_total_criptoNoticias+sentimiento_total_twetter+sentimiento_total_reddit
-    
+    '''
     print(sentimiento_total_twetter)
     print(sentimiento_total_reddit)
     print(sentimiento_total_criptoNoticias)
     print(sentimiento_total)
-    
+    '''
 
     pronostico_BTC = calculo_de_sentimiento(sentimiento_total)
-    #print(pronostico_BTC)
-    #print(ayer)
+    
+ 
     precio1 = precio_fecha_open(fecha_ayer,fecha_actual) #precio de cierre de un dia antes del precio a predecir
     precio2 = precio_fecha_open(fecha_actual,fecha_mañana)#precio a predecir
     
