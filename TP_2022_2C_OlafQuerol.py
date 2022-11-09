@@ -3,6 +3,7 @@ from funciones import *
 if __name__ == '__main__':
 #saco la fechas
     actual =datetime.date.today()
+    print (actual)
     ayer = actual - datetime.timedelta(1)
     mañana = actual +datetime.timedelta(1)
     fecha_actual = actual.strftime('%Y-%m-%d')
@@ -12,8 +13,8 @@ if __name__ == '__main__':
     print(fecha_ayer_reddit)
 #DECLARACIONES DE VARIABLES PARA TWITTER y la consulta que se va hacer 
     tweets = []
-    query = "(Bitcoin OR · OR $BTC) min_faves:100 until:2022-11-08 since:2022-10-07"
-
+    query = "(Bitcoin OR · OR $BTC) min_faves:100 until:2022-11-09 since:2022-10-08"
+    query = "(Bitcoin OR · OR $BTC) min_faves:100 until:"+fecha_actual+" since:"+fecha_ayer
 #DECLARACIONES DE VARIABLES PARA REDDIT
     subreddit = 'Bitcoin'
     limit = 100
@@ -48,8 +49,6 @@ if __name__ == '__main__':
     '''
 
     pronostico_BTC = calculo_de_sentimiento(sentimiento_total)
-    
- 
     precio1 = precio_fecha_open(fecha_ayer,fecha_actual) #precio de cierre de un dia antes del precio a predecir
     precio2 = precio_fecha_open(fecha_actual,fecha_mañana)#precio a predecir
     
