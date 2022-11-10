@@ -129,9 +129,9 @@ def analysis(score):
 
 # calculo el sentimineto en funcion del sentimineto total que es la suma de lso 3 sentiminetos 
 def calculo_de_sentimiento(sentimiento_total):
-    if(sentimiento_total <0):
+    if(sentimiento_total <-5):
         return "Se espera una bajada muy fuerte en el precio"
-    elif(sentimiento_total>=0 and sentimiento_total<8):
+    elif(sentimiento_total>=-4 and sentimiento_total<8):
         return "Se espera una bajada fuerte en el precio"
     elif(sentimiento_total>=8 and sentimiento_total<14):
         return "Se espera una minima disminucion en el precio"
