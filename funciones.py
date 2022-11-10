@@ -129,11 +129,13 @@ def analysis(score):
 
 # calculo el sentimineto en funcion del sentimineto total que es la suma de lso 3 sentiminetos 
 def calculo_de_sentimiento(sentimiento_total):
-    if(sentimiento_total<=7):
+    if(sentimiento_total <0):
+        return "Se espera una bajada muy fuerte en el precio"
+    elif(sentimiento_total>=0 and sentimiento_total<8):
         return "Se espera una bajada fuerte en el precio"
     elif(sentimiento_total>=8 and sentimiento_total<14):
         return "Se espera una minima disminucion en el precio"
-    elif(sentimiento_total>=14 and sentimiento_total<=25):
+    elif(sentimiento_total>=14 and sentimiento_total<26):
         return "se espera un aumento minimo en el precio"
     elif(sentimiento_total>=26 ):
         return "se espera un aumento fuerte en el precio"
@@ -153,10 +155,13 @@ def pasar_a_lista(df):
     return lista
 
 # con esto se obtiene el precio de cierre
-def precio_fecha_open(fecha_ayer,fecha_actual):
+def precio_fecha(fecha_ayer,fecha_actual):
     btc = yf.Ticker("BTC-USD")
     data = btc.history(start=fecha_ayer, end=fecha_actual)
     a = pasar_a_lista(data)
-    valor = a[0][3] 
+    if(a):
+        valor = a[0][3] 
+    else:
+        return "no figura el precio"
     return valor
            
