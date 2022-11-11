@@ -18,4 +18,4 @@ exec @cargar_tabla = cargar_tabla
 go
 
 update Sentimientos_Relacionados set precio_cierre = '18541.2749' where fecha_de_analisis = '2022-11-07'
-delete from Sentimientos_Relacionados  where fecha_de_analisis = '2022-11-08'
+delete from Sentimientos_Relacionados  where fecha_de_analisis = '2022-11-10'

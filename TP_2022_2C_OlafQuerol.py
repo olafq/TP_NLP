@@ -11,7 +11,7 @@ if __name__ == '__main__':
     fecha_ayer_reddit = ayer.strftime('%d,%m,%Y')
 #DECLARACIONES DE VARIABLES PARA TWITTER y la consulta que se va hacer 
     tweets = []
-    query = "(Bitcoin OR · OR $BTC) min_faves:100 until:2022-11-10 since:2022-10-09"
+    query = "(Bitcoin OR · OR $BTC) min_faves:100 until:2022-11-11 since:2022-10-10"
     query = "(Bitcoin OR · OR $BTC) min_faves:100 until:"+fecha_actual+" since:"+fecha_ayer
 #DECLARACIONES DE VARIABLES PARA REDDIT
     subreddit = 'Bitcoin'
